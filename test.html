@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CLIP Foot Diagnosis Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 40px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    pre {
+      background: #f7f7f7;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CLIP Foot Diagnosis</h1>
+  <p>This simple static frontend calls your FastAPI <code>/predict</code> endpoint.</p>
+
+  <label for="fname">Filename:</label>
+  <input type="text" id="fname" value="grade_0.jpg" style="width:200px">
+  <button onclick="predictImage()">Run Prediction</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    async function predictImage() {
+      const filename = document.getElementById("fname").value;
+      const resultBox = document.getElementById("result");
+      resultBox.textContent = "Running prediction...";
+
+      try {
+        const response = await fetch("http://localhost:8000/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ filename })
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          throw new Error(`Server error ${response.status}: ${errText}`);
+        }
+
+        const result = await response.json();
+        resultBox.textContent = JSON.stringify(result, null, 2);
+        console.log("Prediction result:", result);
+      } catch (err) {
+        console.error(err);
+        resultBox.textContent = `Error: ${err.message}`;
+      }
+    }
+  </script>
+</body>
+</html>
