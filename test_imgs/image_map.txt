@@ -1,0 +1,13 @@
+grade_0     -> ../../imgs_wagner_0/Barefeet_Soles.jpg
+
+grade_1_2   -> ../../imgs_wagner_1_to_4/train/grade_1/foot-ulcer-217x300_jpg.rf.0066c5034af82e899a455d3f66f9e0ce.jpg
+
+grade_3     -> ../../imgs_wagner_1_to_4/test/grade_3/e8511b3d622ba7d21d0b7749ff2111b9_jpg.rf.9ec827520ede89a4211238ec7e15c72d.jpg
+
+grade_4-5   -> ../../imgs_wagner_1_to_4/test/grade_4/303213_jpg.rf.3326d7910dabe04415e375dba12ea51f.jpg
+
+
+Sources:
+
+- imgs_wagner_0 = https://commons.wikimedia.org/wiki/File:Barefeet_Soles.jpg
+- imgs_wagner_1_to_4 = https://www.kaggle.com/datasets/khalidsiddiqui2003/dfu-dataset-annotated-into-4-classes
