@@ -45,7 +45,7 @@ def evaluate_one(name, img_feat):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5500"],   # include 'null' for file://, '*' for anything else
+    allow_origins=["https://dfai-frontend.onrender.com", "http://localhost:5500"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
