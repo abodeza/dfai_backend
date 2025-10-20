@@ -58,13 +58,13 @@ model_32, preprocess = clip.load("ViT-B/32", device=device)
 model_32.eval()
 
 with torch.no_grad():
-    no_ulcer = model_32.encode_text(clip.tokenize("a healthy human foot with intact skin and no wounds").to(device)).float()
+    no_ulcer = model_32.encode_text(torch.tensor(clip.tokenize("a healthy human foot with intact skin and no wounds")).to(device)).float()
     ulcer = model_32.encode_text(torch.tensor(clip.tokenize("a human foot wound").to(device))).float()
 
-    no_abscess = model_32.encode_text(clip.tokenize("a human foot with no abscess on wound").to(device)).float()
+    no_abscess = model_32.encode_text(torch.tensor(clip.tokenize("a human foot with no abscess on wound")).to(device)).float()
     abscess = model_32.encode_text(torch.tensor(clip.tokenize("a human foot with abscess covering wound").to(device))).float()
 
-    no_gangrene = model_32.encode_text(clip.tokenize("a human foot with no dead black tissue").to(device)).float()
+    no_gangrene = model_32.encode_text(torch.tensor(clip.tokenize("a human foot with no dead black tissue").to(device))).float()
     gangrene = model_32.encode_text(torch.tensor(clip.tokenize("a human foot with black dead tissue and gangrene").to(device))).float()
 
 print("checkpoint: text features encoded")
@@ -99,4 +99,4 @@ def predict(req: PredictRequest):
 if __name__ == "__main__":
     # simple local runner; on AWS you can run with uvicorn as well
     import uvicorn
-    uvicorn.run("app:predict", host="0.0.0.0", port=int(os.getenv("PORT", "8000")))
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", "8000")))
